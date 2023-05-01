@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.eneskaraoglu.ek.entity.DepoEnvanter;
 import com.eneskaraoglu.ek.entity.Envanter;
 
 public interface EnvanterRepository extends JpaRepository<Envanter, Integer> {

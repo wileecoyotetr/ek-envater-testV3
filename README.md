@@ -10,8 +10,59 @@ Java 17
 MySql
 
 
-http://127.0.0.1:8080/api/urunler
+Spring data jpa
 
+JpaRepository
+
+Spring data rest
+
+DAO 
+
+Lombok
+
+
+Spring data jpa;
+Spring data rest;
+CRUD
+{
+    "_links": {
+        "depoEnvanters": {
+            "href": "http://127.0.0.1:8080/data-rest/depoEnvanters{?page,size,sort}",
+            "templated": true
+        },
+        "envanters": {
+            "href": "http://127.0.0.1:8080/data-rest/envanters{?page,size,sort}",
+            "templated": true
+        },
+        "katalogs": {
+            "href": "http://127.0.0.1:8080/data-rest/katalogs{?page,size,sort}",
+            "templated": true
+        },
+        "envanterLogs": {
+            "href": "http://127.0.0.1:8080/data-rest/envanterLogs{?page,size,sort}",
+            "templated": true
+        },
+        "envanterHarekets": {
+            "href": "http://127.0.0.1:8080/data-rest/envanterHarekets{?page,size,sort}",
+            "templated": true
+        },
+        "katalogEnvanters": {
+            "href": "http://127.0.0.1:8080/data-rest/katalogEnvanters{?page,size,sort}",
+            "templated": true
+        },
+        "profile": {
+            "href": "http://127.0.0.1:8080/data-rest/profile"
+        }
+    }
+}
+
+Create, Read, Update, Delete
+http://127.0.0.1:8080/env/envanterHareket
+main logic is ;
+EnvanterHareketDAOJpaImpl.java
+
+
+DB NOTES;
 
 CREATE DATABASE  IF NOT EXISTS `envanter_directory`;
 USE `envanter_directory`;
