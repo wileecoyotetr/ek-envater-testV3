@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.eneskaraoglu.ek.entity.Envanter;
+import com.eneskaraoglu.ek.exception.NotFoundException;
 
 public interface EnvanterRepository extends JpaRepository<Envanter, Integer> {
 	
@@ -20,7 +21,6 @@ public interface EnvanterRepository extends JpaRepository<Envanter, Integer> {
 		//ilk kayıt ise 0 set edildi
 		//Update ise findById yapılıp set edildi.
 		int id = entity.getEnvanterId();
-		System.out.println("entity.getEnvanterId()->"+id);
 		if (id == 0) {
 			entity.setEnvanterMiktar(new BigDecimal(0));
 		}
@@ -33,7 +33,7 @@ public interface EnvanterRepository extends JpaRepository<Envanter, Integer> {
 				entityOld = result.get();
 			}
 			else {
-				throw new RuntimeException("Envanter Id bulunamadı ->"+id);
+				throw new NotFoundException("Envanter Id bulunamadı ->"+id);
 			}
 			entity.setEnvanterMiktar(entityOld.getEnvanterMiktar());
 		}
