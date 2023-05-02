@@ -22,7 +22,6 @@ public class EnvanterHareketController {
 		service = theService;
 	}
 	
-	
 	@PostMapping("/envanterHareket")
 	public EnvanterHareket addEnvanterHareket(@RequestBody EnvanterHareket theEntity) {
 		theEntity.setEnvanterHareketId(0);

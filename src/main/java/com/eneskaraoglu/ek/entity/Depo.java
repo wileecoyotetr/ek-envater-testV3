@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Table(name="t_depo")
 @Getter @Setter @NoArgsConstructor 
-public class Depo {
+public class Depo extends BaseEntity  {
 	
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)

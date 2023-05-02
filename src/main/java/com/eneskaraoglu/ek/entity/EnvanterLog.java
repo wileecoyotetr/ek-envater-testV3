@@ -1,7 +1,7 @@
 package com.eneskaraoglu.ek.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,23 +22,24 @@ public class EnvanterLog {
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 @Column(name="envanter_log_id")
 	 private int envanterLogId;
-	 
-	@Column(name="depo_id")
-	private int depoId;
-	
-	@Column(name="envanter_id")
-	private int envanterId;
-	
-	@Column(name="hareket_miktar")
-	private BigDecimal hareketMiktar;
 
-	@Column(name="hareket_tarih")
-	private Date hareketTarih;
+	@Column(name="log_tarih")
+	private Timestamp logTarih;
 
-	@Column(name="hareket_turu")
-	private String hareketTuru;
+	@Column(name="log_method")
+	private String logMethod;
 	
-	@Column(name="hareket_tipi")
-	private String hareketTipi;
+	@Column(name="log_parametre")
+	private String logParametre;
+	
+	@Column(name="log_return")
+	private String logReturn;
+	
+	@Column(name="log_sure_sn")
+	private BigDecimal logSureSn;
+	
+	@Column(name="log_error")
+	private String logError;
+	
 	
 }

@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EnvanterHareket {
+public class EnvanterHareket extends BaseEntity  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

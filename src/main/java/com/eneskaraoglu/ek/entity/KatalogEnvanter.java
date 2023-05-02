@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Table(name="t_katalog_envanter")
 @Getter @Setter @NoArgsConstructor 
-public class KatalogEnvanter {
+public class KatalogEnvanter extends BaseEntity {
 	
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
