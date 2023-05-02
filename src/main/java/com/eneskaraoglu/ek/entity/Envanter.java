@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,5 +34,11 @@ public class Envanter extends BaseEntity {
 
 	@Column(name="kritik_miktar")
 	private BigDecimal kritikMiktar;
+	
+	@Column(name="katalog_id")
+	private int katalogId;
+	
+	@Transient
+	private DepoEnvanter depoEnvanter;
 
 }

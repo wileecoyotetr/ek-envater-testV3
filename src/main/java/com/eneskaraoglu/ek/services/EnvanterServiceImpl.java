@@ -7,40 +7,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eneskaraoglu.ek.dao.EnvanterHareketDAO;
-import com.eneskaraoglu.ek.entity.EnvanterHareket;
+import com.eneskaraoglu.ek.dao.EnvanterDAO;
+import com.eneskaraoglu.ek.entity.Envanter;
 
 @Service
-public class EnvanterHareketServiceImpl implements EnvanterHareketService {
+public class EnvanterServiceImpl implements EnvanterService {
 	
-	private EnvanterHareketDAO dao;
+	private EnvanterDAO dao;
 	
 	@Autowired
-	public EnvanterHareketServiceImpl(EnvanterHareketDAO theDao) {
+	public EnvanterServiceImpl(EnvanterDAO theDao) {
 		dao = theDao;
 	}
 
 	@Override
-	public List<EnvanterHareket> findAll() {
+	public List<Envanter> findAll() {
 		return dao.findAll();
 	}
 
 	@Override
-	public EnvanterHareket findById(int theId) {
-		Optional<EnvanterHareket> result = Optional.ofNullable(dao.findById(theId));
-		EnvanterHareket envanterHareket = null;
+	public Envanter findById(int theId) {
+		Optional<Envanter> result = Optional.ofNullable(dao.findById(theId));
+		Envanter envanter = null;
 		if (result.isPresent()) {
-			envanterHareket = result.get();
+			envanter = result.get();
 		}
 		else {
 			throw new RuntimeException("Depo Id bulunamadı ->"+theId);
 		}
-		return envanterHareket;
+		return envanter;
 	}
 
 	@Transactional
 	@Override
-	public EnvanterHareket save(EnvanterHareket theEntity) {
+	public Envanter save(Envanter theEntity) {
 		return dao.save(theEntity);
 	}
 

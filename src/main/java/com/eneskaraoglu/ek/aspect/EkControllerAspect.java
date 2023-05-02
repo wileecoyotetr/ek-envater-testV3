@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.eneskaraoglu.ek.entity.BaseEntity;
 import com.eneskaraoglu.ek.entity.Envanter;
 import com.eneskaraoglu.ek.entity.EnvanterLog;
+import com.eneskaraoglu.ek.lib.Lib;
 import com.eneskaraoglu.ek.repository.EnvanterLogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +25,7 @@ public class EkControllerAspect {
 
 	private EnvanterLogRepository envanterLogRepository;
 	
-	
+	Lib lib = new Lib();
 	
 	public EkControllerAspect(EnvanterLogRepository envanterLogRepository) {
 		this.envanterLogRepository = envanterLogRepository;
@@ -62,7 +63,7 @@ public class EkControllerAspect {
 		Object[] args = theProceedingJoinPoint.getArgs();
 		EnvanterLog log = new EnvanterLog();
 		log.setEnvanterLogId(0);
-		log.setLogTarih(new Timestamp(System.currentTimeMillis()));
+		log.setLogTarih(lib.getSysDate());
 		log.setLogMethod(method);
 		
 		String parameters = "";
@@ -72,10 +73,9 @@ public class EkControllerAspect {
 				if (tempArg!=null) {
 					
 					if (tempArg instanceof BaseEntity) {
-						ObjectMapper mapper = new ObjectMapper();
-						  String json = mapper.writeValueAsString(tempArg);
-						  myLogger.info("\n"+"========>"+method+"---getClass:"+tempArg.getClass()+" param: "+ json.toString());	
-						  parameters = parameters.concat("/**/").concat(tempArg.getClass().toString()).concat(":").concat(json.toString());
+
+						  myLogger.info("\n"+"========>"+method+"---getClass:"+tempArg.getClass()+" param: "+ lib.jsonString(tempArg));	
+						  parameters = parameters.concat("/**/").concat(tempArg.getClass().toString()).concat(":").concat(lib.jsonString(tempArg));
 					}
 					else {
 						myLogger.info("\n"+"========>"+method+"---getClass:"+tempArg.getClass()+" param: "+ tempArg.toString());					
@@ -95,9 +95,7 @@ public class EkControllerAspect {
 		try {
 			result = theProceedingJoinPoint.proceed();
 			if (result instanceof BaseEntity) {
-				ObjectMapper mapper = new ObjectMapper();
-				  String json = mapper.writeValueAsString(result);
-				  log.setLogReturn(result.getClass().toString().concat(":").concat(json.toString()));	
+				  log.setLogReturn(result.getClass().toString().concat(":").concat(lib.jsonString(result)));	
 			}
 			else {
 				log.setLogReturn(result.toString());
@@ -106,7 +104,8 @@ public class EkControllerAspect {
 		} catch (Exception e) {
 			// log the exception
 			myLogger.warning(e.getMessage());
-			log.setLogError(e.getMessage());
+			myLogger.info("\n"+"========>"+e.getMessage());
+			log.setLogError(e.getMessage().toString());
 			envanterLogRepository.save(log);
 			throw e;
 		}
