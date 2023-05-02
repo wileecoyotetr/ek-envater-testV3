@@ -1,6 +1,9 @@
 package com.eneskaraoglu.ek.rest;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,5 +45,23 @@ public class EnvanterController {
 		}
 		service.deleteById(id);
 		return "Silinen Envanter ->"+ id;
+	}
+	
+	@GetMapping("/envanterAll")
+	public List<Envanter> getEnvanter() {
+		List<Envanter> result = service.findAll();
+		return result;
+	}
+	
+	@GetMapping("/envanter/{id}")
+	public Envanter getEnvanter(@PathVariable int id) {
+		Envanter result = service.findById(id);
+		return result;
+	}
+	
+	@GetMapping("/envanter")
+	public List<Envanter> getEnvanterDetail(@RequestBody Envanter theEntity) {
+		List<Envanter> result = service.findByEntity(theEntity);
+		return result;
 	}
 }

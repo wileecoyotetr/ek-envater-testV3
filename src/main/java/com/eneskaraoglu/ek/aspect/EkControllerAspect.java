@@ -74,11 +74,11 @@ public class EkControllerAspect {
 					
 					if (tempArg instanceof BaseEntity) {
 
-						  myLogger.info("\n"+"========>"+method+"---getClass:"+tempArg.getClass()+" param: "+ lib.jsonString(tempArg));	
+						  //myLogger.info("\n"+"========>"+method+"---getClass:"+tempArg.getClass()+" param: "+ lib.jsonString(tempArg));	
 						  parameters = parameters.concat("/**/").concat(tempArg.getClass().toString()).concat(":").concat(lib.jsonString(tempArg));
 					}
 					else {
-						myLogger.info("\n"+"========>"+method+"---getClass:"+tempArg.getClass()+" param: "+ tempArg.toString());					
+						//myLogger.info("\n"+"========>"+method+"---getClass:"+tempArg.getClass()+" param: "+ tempArg.toString());					
 						parameters = parameters.concat("/**/").concat(tempArg.toString());
 					}
 				}
@@ -94,17 +94,17 @@ public class EkControllerAspect {
 		
 		try {
 			result = theProceedingJoinPoint.proceed();
-			if (result instanceof BaseEntity) {
+			if (result != null && result instanceof BaseEntity) {
 				  log.setLogReturn(result.getClass().toString().concat(":").concat(lib.jsonString(result)));	
 			}
 			else {
-				log.setLogReturn(result.toString());
+				log.setLogReturn(lib.str(result));
 			}
 				
 		} catch (Exception e) {
 			// log the exception
 			myLogger.warning(e.getMessage());
-			myLogger.info("\n"+"========>"+e.getMessage());
+			//myLogger.info("\n"+"========>"+e.getMessage());
 			log.setLogError(e.getMessage().toString());
 			envanterLogRepository.save(log);
 			throw e;

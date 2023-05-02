@@ -3,6 +3,7 @@ package com.eneskaraoglu.ek.dao;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,7 @@ import jakarta.persistence.TypedQuery;
 @Repository
 public class EnvanterDAOJpaImpl implements EnvanterDAO {
 
+	private Logger myLogger = Logger.getLogger(getClass().getName());
 	private EntityManager entityManager;
 
 	@Autowired
@@ -108,6 +110,24 @@ public class EnvanterDAOJpaImpl implements EnvanterDAO {
 
 		Envanter result = entityManager.find(Envanter.class, theId);
 		entityManager.remove(result);
+	}
+
+	@Override
+	public List<Envanter> findByEntity(Envanter theEntity) {
+		TypedQuery<Envanter> theQuery = entityManager.createQuery(
+				" from Envanter "
+				+ " where "
+				+ " (UCASE(envanterAdi) like CONCAT('%',UCASE(:envanterAdi),'%') or :envanterAdi is null) "
+				+ " and (UCASE(envanterKodu) like CONCAT('%',UCASE(:envanterKodu),'%') or :envanterKodu is null ) "
+				+ " and (katalogId = :katalogId or :katalogId = 0) "
+				, Envanter.class);
+		theQuery.
+		setParameter("envanterAdi", theEntity.getEnvanterAdi())
+		.setParameter("envanterKodu", theEntity.getEnvanterKodu())
+		.setParameter("katalogId", theEntity.getKatalogId());
+		
+		List<Envanter>  result = theQuery.getResultList();
+		return result;
 	}
 
 }

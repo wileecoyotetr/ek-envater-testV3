@@ -10,5 +10,6 @@ public interface EnvanterService {
 	Envanter findById(int theId);
 	Envanter save(Envanter theEntity);
 	void deleteById(int theId);
+	List<Envanter> findByEntity(Envanter theEntity);
 
 }

@@ -49,5 +49,10 @@ public class EnvanterServiceImpl implements EnvanterService {
 	public void deleteById(int theId) {
 		dao.deleteById(theId);
 	}
+
+	@Override
+	public List<Envanter> findByEntity(Envanter theEntity) {
+		return dao.findByEntity(theEntity);
+	}
 	
 }

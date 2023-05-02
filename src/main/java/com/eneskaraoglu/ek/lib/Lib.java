@@ -39,8 +39,16 @@ public class Lib {
 		}
 		return "";
 	}
-	
+
 	public Timestamp getSysDate() {
 		return new Timestamp(System.currentTimeMillis());
+	}
+
+	public String str(Object obj) {
+		if (obj == null) {
+			return "";
+		} else {
+			return obj.toString();
+		}
 	}
 }
