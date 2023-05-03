@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eneskaraoglu.ek.dao.EnvanterDAO;
 import com.eneskaraoglu.ek.entity.Envanter;
+import com.eneskaraoglu.ek.entity.VEnvanterDepo;
 
 @Service
 public class EnvanterServiceImpl implements EnvanterService {
@@ -51,7 +52,7 @@ public class EnvanterServiceImpl implements EnvanterService {
 	}
 
 	@Override
-	public List<Envanter> findByEntity(Envanter theEntity) {
+	public List<VEnvanterDepo> findByEntity(VEnvanterDepo theEntity) {
 		return dao.findByEntity(theEntity);
 	}
 	

@@ -3,6 +3,8 @@ package com.eneskaraoglu.ek.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.data.annotation.Immutable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,16 +15,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
+@Entity
+@Immutable
 @Table(name = "v_envanter_depo")
 @Getter
 @Setter
 @NoArgsConstructor
 public class VEnvanterDepo extends BaseEntity  {
 
+	@Id
 	private String envanterKodu;
 	private String envanterAdi;
-	private BigDecimal envaterMiktar;
+	private BigDecimal envanterMiktar;
 	private String depoKod;
 	private String depoAdi;
 	private BigDecimal depoMiktar;

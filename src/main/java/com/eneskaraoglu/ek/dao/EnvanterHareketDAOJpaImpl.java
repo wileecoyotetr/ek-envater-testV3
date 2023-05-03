@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.eneskaraoglu.ek.entity.DepoEnvanter;
 import com.eneskaraoglu.ek.entity.Envanter;
 import com.eneskaraoglu.ek.entity.EnvanterHareket;
+import com.eneskaraoglu.ek.lib.EmailService;
 import com.eneskaraoglu.ek.lib.Lib;
 
 import jakarta.persistence.EntityManager;
@@ -24,9 +25,12 @@ public class EnvanterHareketDAOJpaImpl implements EnvanterHareketDAO {
 	private Lib lib;
 
 	@Autowired
-	public EnvanterHareketDAOJpaImpl(EntityManager theEntityManager, Lib theLib) {
+	private EmailService emailService;  
+
+	@Autowired
+	public EnvanterHareketDAOJpaImpl(EntityManager theEntityManager, EmailService theEmailService) {
 		entityManager = theEntityManager;
-		lib = theLib;
+		emailService = theEmailService;
 	}
 
 	@Override
@@ -134,8 +138,12 @@ public class EnvanterHareketDAOJpaImpl implements EnvanterHareketDAO {
 		}
 
 		if (sonMiktar.compareTo(kritikMiktar) <= 0) {
+			//mail gönderilecek.....adasd
 			System.out.println("Kritik miktara ulaşıldı. Mevcu miktar = " + envanterMiktar.add(hareketMiktar)
 					+ ", kritik miktar = " + kritikMiktar);
+			
+		//	emailService.sendSimpleMessage("-----@gmail.com", "kritik miktar", envanter.getEnvanterKodu()+ " için Kritik miktara ulaşıldı. Mevcu miktar = " + envanterMiktar.add(hareketMiktar)
+		//			+ ", kritik miktar = " + kritikMiktar);
 		}
 
 		if (depoSonMiktar.compareTo(new BigDecimal(0)) < 0) {

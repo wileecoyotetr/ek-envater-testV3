@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eneskaraoglu.ek.entity.DepoEnvanter;
 import com.eneskaraoglu.ek.entity.Envanter;
+import com.eneskaraoglu.ek.entity.VEnvanterDepo;
 import com.eneskaraoglu.ek.exception.NotFoundException;
 import com.eneskaraoglu.ek.lib.Lib;
 
@@ -97,7 +98,6 @@ public class EnvanterDAOJpaImpl implements EnvanterDAO {
 			depoEnvanter.setDepoEnvanterId(0);
 			depoEnvanter.setEnvanterId(result.getEnvanterId());
 			depoEnvanter.setDepoMiktar(new BigDecimal(0));
-			System.out.println("-------2--------------------->"+lib.jsonString(depoEnvanter));
 			DepoEnvanter resultDepoEnavnter = entityManager.merge(depoEnvanter);
 			result.setDepoEnvanter(resultDepoEnavnter);
 		}
@@ -113,20 +113,27 @@ public class EnvanterDAOJpaImpl implements EnvanterDAO {
 	}
 
 	@Override
-	public List<Envanter> findByEntity(Envanter theEntity) {
-		TypedQuery<Envanter> theQuery = entityManager.createQuery(
-				" from Envanter "
+	public List<VEnvanterDepo> findByEntity(VEnvanterDepo theEntity) {
+		TypedQuery<VEnvanterDepo> theQuery = entityManager.createQuery(
+				" from VEnvanterDepo "
 				+ " where "
 				+ " (UCASE(envanterAdi) like CONCAT('%',UCASE(:envanterAdi),'%') or :envanterAdi is null) "
-				+ " and (UCASE(envanterKodu) like CONCAT('%',UCASE(:envanterKodu),'%') or :envanterKodu is null ) "
-				+ " and (katalogId = :katalogId or :katalogId = 0) "
-				, Envanter.class);
+				+ " and (UCASE(depoKod) like CONCAT('%',UCASE(:depoKod),'%') or :depoKod is null ) "
+				+ " and (UCASE(bolge) like CONCAT('%',UCASE(:bolge),'%') or :bolge is null ) "
+				+ " and (UCASE(sehir) like CONCAT('%',UCASE(:sehir),'%') or :sehir is null ) "
+				+ " and (UCASE(adres) like CONCAT('%',UCASE(:adres),'%') or :adres is null ) "
+				+ " and (katalogKodu = :katalogKodu or :katalogKodu is null) "
+				, VEnvanterDepo.class);
 		theQuery.
 		setParameter("envanterAdi", theEntity.getEnvanterAdi())
-		.setParameter("envanterKodu", theEntity.getEnvanterKodu())
-		.setParameter("katalogId", theEntity.getKatalogId());
+		.setParameter("depoKod", theEntity.getDepoKod())
+		.setParameter("bolge", theEntity.getBolge())
+		.setParameter("sehir", theEntity.getSehir())
+		.setParameter("adres", theEntity.getAdres())
+		.setParameter("katalogKodu", theEntity.getKatalogKodu())
+		;
 		
-		List<Envanter>  result = theQuery.getResultList();
+		List<VEnvanterDepo>  result = theQuery.getResultList();
 		return result;
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eneskaraoglu.ek.entity.Envanter;
+import com.eneskaraoglu.ek.entity.VEnvanterDepo;
 import com.eneskaraoglu.ek.services.EnvanterService;
 
 @RestController
@@ -60,8 +61,8 @@ public class EnvanterController {
 	}
 	
 	@GetMapping("/envanter")
-	public List<Envanter> getEnvanterDetail(@RequestBody Envanter theEntity) {
-		List<Envanter> result = service.findByEntity(theEntity);
+	public List<VEnvanterDepo> getEnvanterDetail(@RequestBody VEnvanterDepo theEntity) {
+		List<VEnvanterDepo> result = service.findByEntity(theEntity);
 		return result;
 	}
 }
